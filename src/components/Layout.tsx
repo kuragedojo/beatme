@@ -8,34 +8,19 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
-  IonMenu,
-  IonList,
-  IonItem,
-  IonLabel,
   IonButtons,
   IonMenuButton,
   IonButton
 } from '@ionic/react';
-import { pencil, settings, timer } from 'ionicons/icons';
+import { pencil, timer } from 'ionicons/icons';
 import React from 'react';
 import './Layout.css';
+import MenuSettings from './MenuSettings';
 
 const Layout: React.FC = ({ children }) => {
   return (
     <div>
-      <IonMenu side="start" contentId="main-content">
-        <IonHeader>
-          <IonTitle>Menu</IonTitle>
-        </IonHeader>
-        <IonContent>
-          <IonList>
-            <IonItem>
-              <IonIcon icon={settings} slot="start"></IonIcon>
-              <IonLabel>Einstellungen</IonLabel>
-            </IonItem>
-          </IonList>
-        </IonContent>
-      </IonMenu>
+      <MenuSettings></MenuSettings>
       <IonPage id="main-content">
         <IonHeader>
           <IonToolbar>
