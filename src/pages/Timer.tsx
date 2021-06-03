@@ -1,6 +1,8 @@
 import Layout from '../components/Layout';
 import React, { Component } from 'react';
+import { RefresherEventDetail } from '@ionic/core';
 import './Timer.css';
+import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonRefresher, IonRefresherContent, IonContent } from '@ionic/react';
 
 enum TimerPhase {
   START,
@@ -28,7 +30,6 @@ type TimerProps = {
 
 export class Timer extends Component<TimerProps, TimerState> {
 
-
   constructor(props: TimerProps) {
     super(props);
 
@@ -37,24 +38,42 @@ export class Timer extends Component<TimerProps, TimerState> {
       round: props.rounds,
       set: props.sets,
       phase: TimerPhase.START,
-      interval: setTimeout(() => {},0)
+      interval: setTimeout(() => { }, 0)
     };
+
+    this.doReset = this.doReset.bind(this);
+  }
+
+  doReset(event?: CustomEvent<RefresherEventDetail>) {
+    const interval = setInterval(() => this.tick(), 1000);
+
+    this.setState({
+      time: this.props.warmUpTime,
+      round: this.props.rounds,
+      set: this.props.sets,
+      phase: TimerPhase.START,
+      interval: interval
+    });
+
+    if (event !== undefined) {
+      event.detail.complete();
+    }
   }
 
   getPhaseText() {
-    if(this.state.phase === TimerPhase.START) {
+    if (this.state.phase === TimerPhase.START) {
       return 'START';
     }
-    if(this.state.phase === TimerPhase.WARMUP) {
+    if (this.state.phase === TimerPhase.WARMUP) {
       return 'WARMUP';
     }
-    if(this.state.phase === TimerPhase.WORKOUT) {
+    if (this.state.phase === TimerPhase.WORKOUT) {
       return 'WORKOUT';
     }
-    if(this.state.phase === TimerPhase.REST) {
+    if (this.state.phase === TimerPhase.REST) {
       return 'REST';
     }
-    if(this.state.phase === TimerPhase.END) {
+    if (this.state.phase === TimerPhase.END) {
       return 'END';
     }
   }
@@ -65,35 +84,35 @@ export class Timer extends Component<TimerProps, TimerState> {
     let newRound = this.state.round;
     let newSet = this.state.set;
 
-    if(this.state.phase === TimerPhase.START) {
+    if (this.state.phase === TimerPhase.START) {
       newPhase = TimerPhase.WORKOUT;
     }
 
-    if(newTime === 0) {
-      if(this.state.phase === TimerPhase.WARMUP) {
+    if (newTime === 0) {
+      if (this.state.phase === TimerPhase.WARMUP) {
         newPhase = TimerPhase.WORKOUT;
         newTime = this.props.workoutTime;
       }
 
-      if(this.state.phase === TimerPhase.WORKOUT) {
+      if (this.state.phase === TimerPhase.WORKOUT) {
         newPhase = TimerPhase.REST;
         newTime = this.props.restTime;
       }
 
-      if(this.state.phase === TimerPhase.REST) {
-          newPhase = TimerPhase.WARMUP;
-          newTime = this.props.warmUpTime;
-          if(newSet === 1) {
-            if(newRound === 1) {
-              newPhase = TimerPhase.END;
-              clearInterval(this.state.interval)
-            } else {
-              newSet = this.props.sets;
-              newRound--;
-            }
+      if (this.state.phase === TimerPhase.REST) {
+        newPhase = TimerPhase.WARMUP;
+        newTime = this.props.warmUpTime;
+        if (newSet === 1) {
+          if (newRound === 1) {
+            newPhase = TimerPhase.END;
+            clearInterval(this.state.interval)
           } else {
-            newSet--;
+            newSet = this.props.sets;
+            newRound--;
           }
+        } else {
+          newSet--;
+        }
       }
     }
 
@@ -106,21 +125,29 @@ export class Timer extends Component<TimerProps, TimerState> {
   }
 
   componentDidMount() {
-    const interval = setInterval(() => this.tick(), 1000);
-    this.setState({
-      interval: interval
-    });
+    this.doReset();
   }
 
   render() {
     return (
       <Layout>
-        <div className="container">
-          <p>Runde: {this.state.round}/{this.props.rounds}</p>
-          <p>Set: {this.state.set}/{this.props.sets}</p>
-          <p>Phase: {this.getPhaseText()}</p>
-          <p>{this.state.time}</p>
-        </div>
+        <IonContent>
+          <IonRefresher slot="fixed" onIonRefresh={this.doReset}>
+            <IonRefresherContent></IonRefresherContent>
+          </IonRefresher>
+          <IonCard>
+            <IonCardHeader>
+              <IonCardTitle>Test-Timer</IonCardTitle>
+              <IonCardSubtitle><strong>Time:</strong> {this.state.time}</IonCardSubtitle>
+            </IonCardHeader>
+
+            <IonCardContent>
+              <strong>Runde:</strong> {this.state.round}/{this.props.rounds}<br />
+              <strong>Set:</strong> {this.state.set}/{this.props.sets}<br />
+              <strong>Phase:</strong> {this.getPhaseText()}<br />
+            </IonCardContent>
+          </IonCard>
+        </IonContent>
       </Layout>
     );
   }
