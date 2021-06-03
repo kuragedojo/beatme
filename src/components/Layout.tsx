@@ -42,8 +42,8 @@ const Layout: React.FC = ({ children }) => {
           <IonContent fullscreen={true}>
             {children}
           </IonContent>
-          <IonFab vertical="bottom" horizontal="center" slot="fixed">
-            <IonFabButton>
+          <IonFab vertical="bottom" horizontal="center" slot="fixed" >
+            <IonFabButton href="/timer">
               <IonIcon icon={timer} />
             </IonFabButton>
           </IonFab>
