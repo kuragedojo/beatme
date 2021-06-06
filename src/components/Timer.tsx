@@ -1,10 +1,9 @@
-import Layout from '../components/Layout';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { RefresherEventDetail } from '@ionic/core';
-import './Timer.css';
 import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonRefresher, IonRefresherContent, IonContent } from '@ionic/react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import './Timer.css';
 
 enum TimerPhase {
   START,
@@ -175,7 +174,6 @@ export class Timer extends Component<TimerProps, TimerState> {
 
   render() {
     return (
-      <Layout>
         <IonContent>
           <IonRefresher slot="fixed" onIonRefresh={this.doReset}>
             <IonRefresherContent></IonRefresherContent>
@@ -205,7 +203,6 @@ export class Timer extends Component<TimerProps, TimerState> {
             </IonCardContent>
           </IonCard>
         </IonContent>
-      </Layout>
     );
   }
 };

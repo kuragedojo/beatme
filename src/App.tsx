@@ -2,7 +2,6 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
-import Timer from './pages/Timer';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,9 +31,6 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
-        </Route>
-        <Route exact path="/timer">
-          <Timer warmUpTime={2} restTime={3} workoutTime={5} rounds={2} sets={3} />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
