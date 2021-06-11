@@ -7,7 +7,7 @@ The app will be open source, ad free and for free.
 ## MVP
 * deliver a preset of timers like HIIT
 * let users define custom interval timers by rounds, set, warm up time, workout time and rest time
-* abillity to start, pause, stop and restart timers
+* ability to start, pause, stop and restart timers
 
 ## Roadmap
 * configure theme
