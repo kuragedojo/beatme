@@ -31,20 +31,13 @@ const Layout: React.FC = ({ children }) => {
             </IonButtons>
           </IonToolbar>
         </IonHeader>
-        <IonContent fullscreen>
-          <IonHeader collapse="condense">
-            <IonToolbar>
-              <IonTitle size="large">Blank</IonTitle>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent fullscreen={true}>
-            {children}
-          </IonContent>
-          <IonFooter translucent={true}>
-            <IonToolbar>
-            </IonToolbar>
-          </IonFooter>
+        <IonContent>
+          {children}
         </IonContent>
+        <IonFooter>
+          <IonToolbar>
+          </IonToolbar>
+        </IonFooter>
       </IonPage>
     </div>
   );
