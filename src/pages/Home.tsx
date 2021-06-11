@@ -1,12 +1,11 @@
 import Timer from '../components/Timer';
 import Layout from '../components/Layout';
-import './Home.css';
-import { timer } from 'ionicons/icons';
 import React from 'react';
 import {
   IonSlide,
   IonSlides
 } from '@ionic/react';
+import './Home.css';
 
 const Home: React.FC = () => {
 
