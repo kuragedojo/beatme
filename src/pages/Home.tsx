@@ -10,7 +10,7 @@ import './Home.css';
 const Home: React.FC = () => {
 
   const slideOpts = {
-    initialSlide: 1,
+    initialSlide: 0,
     speed: 400
   };
 
