@@ -1,5 +1,7 @@
 {
   "name": "beatMe",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }
