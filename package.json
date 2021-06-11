@@ -44,6 +44,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:ios": "ionic capacitor build ios --prod",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
