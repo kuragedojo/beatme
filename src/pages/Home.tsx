@@ -4,9 +4,6 @@ import './Home.css';
 import { timer } from 'ionicons/icons';
 import React from 'react';
 import {
-  IonFab,
-  IonFabButton,
-  IonIcon,
   IonSlide,
   IonSlides
 } from '@ionic/react';
@@ -28,11 +25,6 @@ const Home: React.FC = () => {
           <Timer warmUpTime={10} restTime={30} workoutTime={240} rounds={4} sets={2} />
         </IonSlide>
       </IonSlides>
-      <IonFab vertical="bottom" horizontal="center" slot="fixed" >
-        <IonFabButton href="/home">
-          <IonIcon icon={timer} />
-        </IonFabButton>
-      </IonFab>
     </Layout>
   );
 };
